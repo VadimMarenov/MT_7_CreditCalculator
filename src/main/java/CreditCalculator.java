@@ -13,15 +13,21 @@ public class CreditCalculator {
     }
 
     public int getPaymentPerMonth() {
-        return 0;
+        double creditRatePerMonth = rate / term / 100;
+        double koef = (creditRatePerMonth * Math.pow(1 + creditRatePerMonth, term)) /
+                (Math.pow(1 + creditRatePerMonth, term) - 1);
+        int paymentPerMonth = (int) (value * koef);
+        return paymentPerMonth;
     }
 
     public int getFullCreditCost() {
-        return 0;
+        int fullCreditCost = getPaymentPerMonth() * term;
+        return fullCreditCost;
     }
 
     public int getCreditOverpayment() {
-        return 0;
+        int creditOverPayment = getFullCreditCost() - value;
+        return creditOverPayment;
     }
 
 }
